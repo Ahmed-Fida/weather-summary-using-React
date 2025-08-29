@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import WeatherSummary from "./WeatherSummary";
+import ToggleButton from "./ToggleButton";
 
 const weatherData = [
   { date: "2024-06-01", maxTemp: 32, minTemp: 22, humidity: 65 },
@@ -22,9 +24,7 @@ export default function App() {
       weatherData.length
   );
 
-  const toggleBackground = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleBackground = () => setDarkMode(!darkMode);
 
   return (
     <div
@@ -36,29 +36,17 @@ export default function App() {
         minHeight: "100vh",
       }}
     >
-      <h2>Weather Summary</h2>
-      <p>
-        Highest temperature was {highest.maxTemp}°C on {highest.date}
-      </p>
-      <p>
-        Lowest temperature was {lowest.minTemp}°C on {lowest.date}
-      </p>
-      <p>Average humidity was {avgHumidity}%</p>
+      <h2>Weather App</h2>
 
-      <button
-        onClick={toggleBackground}
-        style={{
-          marginTop: "20px",
-          padding: "10px 15px",
-          cursor: "pointer",
-          borderRadius: "8px",
-          border: "none",
-          backgroundColor: darkMode ? "#555" : "#007bff",
-          color: "#fff",
-        }}
-      >
-        Toggle Background
-      </button>
+      {/* Weather Summary */}
+      <WeatherSummary
+        highest={highest}
+        lowest={lowest}
+        avgHumidity={avgHumidity}
+      />
+
+      {/* Button */}
+      <ToggleButton darkMode={darkMode} toggleBackground={toggleBackground} />
     </div>
   );
 }
